@@ -8,7 +8,7 @@ stages:
 build:
   stage: build
   script:
-    - ./gradle build
+    - ./gradlew build
   artifacts:
     paths:
       - build/libs/*.jar
