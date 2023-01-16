@@ -1,5 +1,5 @@
 default:
-  image: gradle:jdk19-alpine
+  image: gradle:jdk17-alpine
 
 stages:
   - build
