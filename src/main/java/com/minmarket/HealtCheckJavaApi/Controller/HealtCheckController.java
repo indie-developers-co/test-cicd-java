@@ -41,9 +41,9 @@ public class HealtCheckController {
         response.set(JsonPayload.COOKIES, request.getCookies());
         response.set(JsonPayload.PARAMETERS, request.getParameterMap());
         response.set(JsonPayload.PATH, request.getServletPath());
-        response.set(JsonPayload.BODY, rawBody != null ? Base64.getEncoder().encodeToString(rawBody) : null);
+        response.set(JsonPayload.BODY, rawBody != null ? rawBody : null);
         log.info("REQUEST: {}", request.getParameterMap());
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
