@@ -1,5 +1,5 @@
 default:
-  image: openjdk:18-alpine
+  image: openjdk:19-alpine
 
 stages:
   - build
