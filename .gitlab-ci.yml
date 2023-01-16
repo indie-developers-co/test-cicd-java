@@ -1,0 +1,17 @@
+default:
+  image: gradle:jdk19-alpine
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+    - ./gradlew build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+test:
+  stage:
+    - ./gradlew test
