@@ -11,7 +11,7 @@ build:
     - ./gradlew build
   artifacts:
     paths:
-      - build/libs/*.jar
+      - build/
   only:
     - main
 
@@ -19,3 +19,6 @@ test:
   stage: test
   script:
     - ./gradlew test
+  only:
+    - main
+    - merge_requests
