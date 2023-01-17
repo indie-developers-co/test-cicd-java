@@ -1,5 +1,7 @@
 FROM amazoncorretto:19.0.1
 
+CMD ./gradlew build
+
 RUN mkdir /app
 
 WORKDIR /app
