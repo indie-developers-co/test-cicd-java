@@ -1,5 +1,5 @@
 default:
-  image: openjdk:19-alpine
+  image: amazoncorreto:19.0.1-alpine
 
 stages:
   - build
