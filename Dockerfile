@@ -1,13 +1,18 @@
+## Build
+FROM amazoncorretto:19.0.1 as builder
+
+WORKDIR /
+
+COPY . .
+
+RUN ./gradlew build
+
+
+## Deploy
 FROM amazoncorretto:19.0.1
 
-CMD ./gradlew build
-
-RUN mkdir /app
-
-WORKDIR /app
-
-COPY build/libs/*-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=builder build/libs/*-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
