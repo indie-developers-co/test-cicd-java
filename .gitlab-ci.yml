@@ -4,6 +4,7 @@ default:
 stages:
   - build
   - test
+  - deploy
 
 build:
   stage: build
@@ -22,4 +23,25 @@ test:
     - ./gradlew test
   only:
     - main
+    - develop
     - merge_requests
+
+deploy_staging:
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+  environment:
+    name: staging
+  only:
+    - develop
+
+deploy_prod:
+  stage: deploy
+  script:
+    - echo "Deploy to production server"
+    - curl https://api.render.com/deploy/$RENDER_SERVER_ID?key=$RENDER_SERVER_KEY
+  environment:
+    name: production
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
