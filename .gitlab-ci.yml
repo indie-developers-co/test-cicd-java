@@ -1,11 +1,10 @@
-default:
-  image: amazoncorretto:19.0.1-alpine
-
 stages:
   - build
   - test
+  - deploy
 
 build:
+  image: amazoncorretto:19.0.1-alpine
   stage: build
   script:
     - ./gradlew build
@@ -17,9 +16,34 @@ build:
     - main
 
 test:
+  image: amazoncorretto:19.0.1-alpine
   stage: test
   script:
     - ./gradlew test
   only:
     - main
+    - develop
     - merge_requests
+
+deploy_staging:
+  image: alpine:latest
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+  environment:
+    name: staging
+  only:
+    - develop
+
+deploy_prod:
+  image: alpine:latest
+  stage: deploy
+  script:
+    - echo "Deploy to production server"
+    - apk --no-cache add curl
+    - curl https://api.render.com/deploy/$RENDER_SERVER_ID?key=$RENDER_SERVER_KEY
+  environment:
+    name: production
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
