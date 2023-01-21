@@ -23,7 +23,7 @@ deploy_staging:
   environment:
     name: staging
   only:
-    - develop
+    - main
 
 deploy_prod:
   image: alpine:latest
