@@ -12,6 +12,8 @@ jobs:
       - name: Deploy to Staging
         uses: bounceapp/render-action@0.6.0
         with:
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           service-id: ${{ secrets.RENDER_SERVER_ID }}
           retries: 5
           wait: 16000
@@ -24,7 +26,8 @@ jobs:
       - name: Deploy to Production
         uses: bounceapp/render-action@0.6.0
         with:
-          service-id: ${{ secrets.RENDER_SERVER_ID }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: ${{ secrets.RENDER_SERVER_ID }}}
           retries: 5
           wait: 16000
           sleep: 30000
