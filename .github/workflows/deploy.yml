@@ -1,11 +1,11 @@
-name: Unit Test
+name: Deployments
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  deploy staging:
+  deploy_staging:
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -18,7 +18,7 @@ jobs:
           wait: 16000
           sleep: 30000
 
-  deploy prod:
+  deploy_prod:
     runs-on: ubuntu-latest
     environment: production
     steps:
